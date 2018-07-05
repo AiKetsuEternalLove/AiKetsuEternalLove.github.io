@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Jadwal</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="js/jquery.js"></script>
+    <script src="js/jadwal.js"></script>
+    <link rel="stylesheet" href="css/jadwal.css">
+</head>
+<body>
+    <div class="container">
+        <div class="list-anak">
+            <select name="anak" id="pilih-anak" class="list">
+                <option value="as">Anak A</option>
+                <option value="sd">Anak B</option>
+            </select>
+        </div>
+        
+        <div class="list-hari">
+            <select name="hari" id="pilih-hari" class="list">
+                <option value="">---</option>
+                <option value="monday">Monday</option>
+                <option value="tuesday">Tuesday</option>
+                <option value="wednesday">Wednesday</option>
+                <option value="thursday">Thursday</option>
+                <option value="friday">Friday</option>
+                <option value="saturday">Saturday</option>
+            </select>
+        </div>
+        
+        <div id="schedule-container">
+            <table class="schedule-table">
+                <thead>
+                    <tr class="row-header">
+                        <th>No</th>
+                        <th>Subject</th>
+                        <th>Assignment</th>
+                    </tr>
+                </thead>
+                <tbody class="schedule">
+                    
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>
