@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Login - Free Bulma template</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
+    <!-- Bulma Version 0.7.1-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/login.css">
+    
+    <!--<script src="https://db.gcs.world/src/shortcut.js"></script>-->
+    <script src="js/http-req.js"></script>
+    <script src="js/jquery.js"></script>
+    <script src="js/login.js"></script>
+    <script src="js/live.js"></script>
+    
+</head>
+
+<body>
+    <section class="hero is-success is-fullheight">
+        <div class="hero-body">
+            <div class="container has-text-centered">
+                <div class="column is-4 is-offset-4">
+                    <h3 class="title has-text-grey">Login</h3>
+                    <p class="subtitle has-text-grey">Please login to proceed.</p>
+                    <div class="box">
+                        <figure class="avatar">
+                            <!-- <img src="http://nlsschool.com/assets/logo-withLabel.png"> -->
+                        </figure>
+                        <div class="control">
+                            <label for="#pilih-tingkat">Database</label>
+                            <div class="select is-primary is-fullwidth">
+                                <div class="list-tingkat">
+                                    <select name="level" id="pilih-tingkat" class="list">
+                                        <option value="">---</option>
+                                        <option value="sd">SD</option>
+                                        <option value="smp">SMP</option>
+                                        <option value="sma">SMA</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="control">
+                            <label for="#pilih-level">Type</label>
+                            <div class="select is-primary is-fullwidth">
+                                <div class="list-level">
+                                    <select name="level" id="pilih-level" class="list">
+                                        <option value="">---</option>
+                                        <option value="parent">parent</option>
+                                        <option value="student">student</option>
+                                        <option value="teacher">teacher</option>
+                                        <option value="admin">admin</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+                        
+                        <form id="login-form">
+                            <div class="field">
+                                <div class="control">
+                                    <input id="nis" class="input is-large" type="text" placeholder="NIS / NIK" autofocus="">
+                                </div>
+                            </div>
+                            
+                            <div class="field">
+                                <div class="control">
+                                    <input id="password" class="input is-large" type="password" placeholder="Your Password">
+                                </div>
+                            </div>
+                            <div class="field">
+                                <label class="checkbox">
+                                    <input type="checkbox"> Remember me
+                                </label>
+                            </div>
+                            <input type="submit" id="button-login" class="button is-block is-info is-large is-fullwidth" value="Login"></input>&nbsp;·&nbsp;
+                        </form>
+                    </div>
+                    <p class="has-text-grey">
+                        <a href="../">Sign Up</a> &nbsp;·&nbsp;
+                        <a href="../">Forgot Password</a> &nbsp;·&nbsp;
+                        <a href="../">Need Help?</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+
+</html>
+
+<script>
+    var data = ''
+    var tmpData = ''
+    function respLoginData(result) {
+        data = result
+        tmpData = result
+        console.log(data.admins.length)
+        console.log(data.parents.length)
+        console.log(data.teachers[0].name)
+    }
+    
+    $(function() {
+        
+        init()
+        var _room = $('#pilih-tingkat').val()
+        var _type = $('#pilih-level').val()
+        
+        function init() {
+            getLoginData()
+        }
+        
+        $('#pilih-tingkat').on('change', function (e) {
+            var optionSelected = $("option:selected", this);
+            var valueSelected = this.value;
+            switch(valueSelected) {
+                case "sd":
+                _room = 'sd'
+                break;
+                case "smp":
+                _room = 'smp'
+                break;
+                case "sma":
+                _room = 'sma'
+                break;
+            }
+            console.log(_room)
+        })
+        
+        $('#pilih-level').on('change', function (e) {
+            var optionSelected = $("option:selected", this);
+            var valueSelected = this.value;
+            switch(valueSelected) {
+                case "parent":
+                _type = 'parent'
+                data = tmpData.parents
+                break;
+                case "student":
+                _type = 'student'
+                data = tmpData.students
+                break;
+                case "teacher":
+                _type = 'teacher'
+                data = tmpData.teachers
+                break;
+                case "admin":
+                _type = 'admin'
+                data = tmpData.admins
+                break;
+            }
+            console.log(_type)
+            console.log(data)
+        })
+        
+        $('#login-form').submit(function(e) {
+            e.preventDefault()
+            var login = false;
+            var nis = $("#nis").val();
+            var password = $("#password").val();
+            //                shortcut.get({ _room: _room, _type: _type }).then(function (data) 
+            var count = data.length
+            console.log(data)
+            
+            for (var i = 0; i < count; i++) {
+                if (nis == data[i].nis && password == data[i].password) {
+                    name = data[i].name
+                    nis = data[i].nis
+                    alert('login succes sebagai ' + name)
+                    writeCookie('sessionId', nis, 322)
+                    writeCookie('sessionName', name, 322)
+                    writeCookie('sessionType', _type, 322)
+                    writeCookie('sessionRoom', _room, 322)
+                    login = true;
+                    switch(_type) {
+                        case "parent":
+                        window.location = "index.html"
+                        break;
+                        case "student":
+                        window.location = "index.html"
+                        break;
+                        case "teacher":
+                        switch (_room) {
+                            case 'sd':
+                            window.location = "guru/sd/index.html"
+                            break;
+                            case 'smp':
+                            case 'sma':
+                            window.location = "guru/index.html"
+                            break;
+                        }
+                        break;
+                        case "admin":
+                        window.location = "admin/index.html"
+                        break;
+                    }
+                }
+            }
+            if (!login) {
+                alert('login gagal')
+            }
+        })
+    })
+</script>

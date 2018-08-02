@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Admin siswa</title>
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
+    <!-- Bulma Version 0.7.1-->
+    <link rel="stylesheet" href="../css/bulma.css" />
+    
+    <script src="../js/jquery.js"></script>
+    <script src="https://db.gcs.world/src/shortcut.js"></script>
+    <script src="../js/live.js"></script>
+    <script src="../js/faker.id_ID.js"></script>
+    <script src="../js/login.js"></script>
+</head>
+
+<body>
+    <!-- START NAV -->
+    <nav class="navbar has-shadow">
+        <div class="container">
+            <div class="navbar-brand">
+                <div>
+                    <img src="http://nlsschool.com/assets/logo-withLabel.png" width="100" height="100">
+                </div>
+                
+                <div class="navbar-burger burger" data-target="navMenu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+            
+            <div class="navbar-menu">
+                <div class="navbar-end">
+                    <div class="navbar-item has-dropdown" id="navMenu">
+                        <a class="navbar-link">
+                            Account
+                        </a>
+                        
+                        <div class="navbar-dropdown">
+                            <a class="navbar-item">
+                                Dashboard
+                            </a>
+                            <a class="navbar-item">
+                                Profile
+                            </a>
+                            <a class="navbar-item">
+                                Settings
+                            </a>
+                            <hr class="navbar-divider">
+                            <div class="navbar-item">
+                                Logout
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+    
+    <div class="container">
+        
+        <section class="section">
+            
+            
+            
+            <div class="selected-db" >
+                
+                <label for="#pilih-level">Type</label>
+                <div class="select is-primary is-fullwidth">
+                    <div class="list-level">
+                        <select name="level" id="pilih-level" class="list">
+                            <option value="">---</option>
+                            <option value="parent">parent</option>
+                            <option value="student">student</option>
+                            <option value="teacher">teacher</option>
+                            <option value="admin">admin</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-default">
+                    <form>
+                        <div class="field">
+                            <div class="control">
+                                <input id="username" class="input is-large" type="text" placeholder="username" autofocus="">
+                            </div>
+                        </div>
+                        
+                        <div class="field">
+                            <div class="control">
+                                <input id="name" class="input is-large" type="text" placeholder="name" autofocus="">
+                            </div>
+                        </div>
+                        
+                        <div class="field">
+                            <div class="control">
+                                <input id="password" class="input is-large" type="password" placeholder="Your Password" autocomplete="on">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                
+                <div class="selected-form-parent" style="visibility: hidden">
+                    register parent
+                    <input id="jumlah-anak" class="input is-large" type="text" placeholder="masukkan jumlah anak" autofocus="">
+                    <div id="list-child">
+                    </div>
+                </div>
+                
+                <div class="selected-form-student" style="visibility: hidden">
+                    register student 
+                </div>
+                
+                <div class="selected-form-teacher" style="visibility: hidden">
+                    register teacher
+                </div>
+                
+                <div class="selected-form-admin" style="visibility: hidden">
+                    register admin
+                </div>
+                
+                <button id="button-register" class="button is-primary"> register</button>
+                <button id="button-batch-register" class="button is-primary"> batch regis 5</button>
+                <button id="button-get-all" class="button is-primary"> get all</button>
+                <button id="button-delete-all" class="button is-primary"> delete all</button>
+                <hr>
+                
+                <div class="columns" id="list-item">
+                    <div id="list-nis" class="column is-2">
+                    </div>
+                    <div id="list-name" class="column is-4">
+                    </div>
+                    <div id="button-delete-specific" class="column is-2">
+                    </div>
+                    <div id="button-edit-specific" class="column is-2">
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+
+</body>
+
+</html>
+
+<script>
+    
+    //global variable
+    var _room = readCookie('sessionRoom')
+    //global variable
+    var _type = 'notype'
+    
+    $('#jumlah-anak').change(function() {
+        console.log(this.value)
+        getAllTypeName(this.value, 'student')
+        
+    })
+    
+    $('#pilih-level').on('change', function (e) {
+        var optionSelected = $("option:selected", this);
+        var valueSelected = this.value;
+        switch(valueSelected) {
+            case "parent":
+            _type = 'parent'
+            $(".selected-form-parent").attr('style', 'visibility: visible')
+            $(".selected-form-student").attr('style', 'visibility: hidden')
+            $(".selected-form-teacher").attr('style', 'visibility: hidden')
+            $(".selected-form-admin").attr('style', 'visibility: hidden')
+            populateGetAllData()
+            break;
+            
+            case "student":
+            _type = 'student'
+            $(".selected-form-parent").attr('style', 'visibility: hidden')
+            $(".selected-form-student").attr('style', 'visibility: visible')
+            $(".selected-form-teacher").attr('style', 'visibility: hidden')
+            $(".selected-form-admin").attr('style', 'visibility: hidden')
+            populateGetAllData()
+            break;
+            
+            case "teacher":
+            _type = 'teacher'
+            $(".selected-form-parent").attr('style', 'visibility: hidden')
+            $(".selected-form-student").attr('style', 'visibility: hidden')
+            $(".selected-form-teacher").attr('style', 'visibility: visible')
+            $(".selected-form-admin").attr('style', 'visibility: hidden')
+            populateGetAllData()
+            break;
+            
+            case "admin":
+            _type = 'admin'
+            $(".selected-form-parent").attr('style', 'visibility: hidden')
+            $(".selected-form-student").attr('style', 'visibility: hidden')
+            $(".selected-form-teacher").attr('style', 'visibility: hidden')
+            $(".selected-form-admin").attr('style', 'visibility: visible')
+            populateGetAllData()
+            break;
+        }
+    })
+    
+    populateGetAllData();
+    
+    function getAllTypeName(jumlah, type) {
+        shortcut.get({ _room: _room, _type: type }).then(function(data) {
+            for (var j = 0; j < jumlah; j++) {
+                $("#list-child").append("<select name=\"level\" id=\"pilih-anak-"+j+"\" class=\"list\">")
+                    for (var i = 0; i < data.length; i++) {
+                        $("#pilih-anak-"+j+"").append("<option value=\""+ data[i].name +"\">"+ data[i].name +"</option>")
+                    }
+                    $("#list-child").append("</select>")
+                }
+                console.log($("#list-child > select").length)
+            })
+        }
+        
+        function populateGetAllData() {
+            shortcut.get({ _room: _room, _type: _type }).then(function (data) {
+                console.log(data);
+                emptyList()
+                
+                for (var i = 0; i < data.length; i++) {
+                    $("#list-nis").append(data[i].nis + "<hr>")
+                    $("#list-name").append(data[i].name + "<hr>")
+                    $("#button-delete-specific").append("<button id=\"delete-" + data[i]._id + "\" class=\"button is-primary\">Delete</button> <hr>")
+                    $("#button-edit-specific").append("<button id=\"edit-" + data[i]._id + "\" class=\"button is-primary\">Edit</button> <hr>")
+                    $("#delete-" + data[i]._id).click(function () {
+                        //alert('Deleted')
+                        shortcut.del({ _room: _room, _type: _type, _id: '-' + $(this).attr('id').split('--', 2)[1] })
+                        .then(function (data) {
+                            console.log(data);
+                            populateGetAllData();
+                        });
+                    });
+                }
+            });
+        }
+        
+        
+        $("#button-get-all").click(function () {
+            shortcut.get({ _room: _room, _type: _type}).then(function (data) {
+                console.log(data);
+                emptyList()
+                
+                for (var i = 0; i < data.length; i++) {
+                    $("#list-nis").append(data[i].nis + "<hr>")
+                    $("#list-name").append(data[i].name + "<hr>")
+                    $("#button-delete-specific").append("<button id=\"delete-" + data[i]._id + "\" class=\"button is-primary\">Delete</button> <hr>")
+                    $("#button-edit-specific").append("<button id=\"edit-" + data[i]._id + "\" class=\"button is-primary\">Edit</button> <hr>")
+                    $("#delete-" + data[i]._id).click(function () {
+                        //alert('Deleted')
+                        shortcut.del({ _room: _room, _type: _type, _id: '-' + $(this).attr('id').split('--', 2)[1] })
+                        .then(function (data) {
+                            console.log(data);
+                            populateGetAllData();
+                        });
+                    });
+                }
+            });
+        })
+        
+        $("#button-register").click(function () {
+                var username = $("#username").val();
+                var password = $("#password").val();
+                var name = _type + "_" + _room + "_" + $("#name").val();
+            if (_type == 'parent') {
+                var childName = $('#list-child').find(":selected").toArray();
+                console.log(childName);
+                
+                var data = { children: childName, name: name, password: password, nis: username, _room: _room, _type: _type};
+                //console.log(childName)
+            } else {
+                var data = { name: name, password: password, nis: username, _room: _room, _type: _type};
+            }
+                shortcut.put(data).then(console.log);
+                populateGetAllData();
+        });
+        
+        $("#button-batch-register").click(function () {
+            var count = 0;
+            shortcut.get({ _room: _room, _type: _type }).then(function (data) {
+                this.count = data.length
+                console.log(data)
+                for (var i = this.count; i < this.count + 5; i++) {
+                    var randomName = faker.name.findName()
+                    var data = { _room: _room, _type: _type, password: _type, name: _type + "_" + _room + "_" + randomName, nis: _type + i }
+                    shortcut.put(data).then(console.log);
+                }
+                populateGetAllData()
+            })
+        });
+        
+        $("#button-delete-all").click(function () {
+            shortcut.del({ _room: _room, _type: _type }).then(function () {
+                sleep(100)
+                populateGetAllData()
+            });
+        })
+        
+        function emptyList() {
+            $(".column").each(function () {
+                $(this).empty()
+            })
+        }
+        
+        function sleep(milliseconds) {
+            var start = new Date().getTime();
+            for (var i = 0; i < 1e7; i++) {
+                if ((new Date().getTime() - start) > milliseconds) {
+                    break;
+                }
+            }
+        }
+    </script>

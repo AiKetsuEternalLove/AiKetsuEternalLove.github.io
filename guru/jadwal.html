@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Schedule</title>
+    
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+    <link href="../css/bulma.css" rel="stylesheet"/>
+    <link href="../css/bulma-badge.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="../js/jquery.js"></script>
+    <script src="../js/login.js"></script>
+</head>
+<body>
+    <nav class="navbar has-shadow" role="navigation" aria-label="main navigation">
+        <div class="container">
+            <div class="navbar-brand">
+                <div>
+                    <img src="http://nlsschool.com/assets/logo-withLabel.png" width="200" height="100">
+                </div>
+                
+                <a role="button" class="navbar-burger" id="menu-toggle" data-target="navMenu" aria-label="menu" aria-expanded="false">
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                </a>
+            </div>
+            
+            <div class="navbar-menu" id="navMenu">
+                <div class="navbar-end">
+                    <div class="is-hidden-desktop">
+                        <a class="navbar-item" href="index.html">Home</a>
+                        <a class="navbar-item" href="classforum-parent.html">Class Forum Parent</a>
+                        <a class="navbar-item" href="classforum-student.html">Class Forum Student</a>
+                        <a class="navbar-item is-active" href="jadwal.html">Schedule</a>
+                        <a class="navbar-item" href="">Report</a>
+                        <a class="navbar-item" href="absensi.html">Attendance</a>
+                    </div>
+                    <div class="navbar-item has-dropdown" id="accountMenu">
+                        <hr>
+                        <a class="navbar-link" id="name"></a>
+                        <div class="navbar-dropdown">
+                            <a class="navbar-item" onclick="logout()">Logout</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+    
+    <div class="container-fluid">
+        <section class="section">
+            <div class="columns">
+                <div class="column is-2 is-hidden-touch">
+                    <div class="menu">
+                        <p class="menu-label">General</p>
+                        <ul class="menu-list">
+                            <li>
+                                <a id="pilih-forum">Class Forum</a>
+                                <ul>
+                                    <li><a href="classforum-parent.html">Parent</a></li>
+                                    <li><a href="classforum-student.html">Student</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="jadwal.html" class="is-active">Schedule</a></li>
+                            <li><a>Report</a></li>
+                            <li><a href="absensi.html">Attendance</a></li>
+                            <li><a>Nilai Tugas</a></li>
+                        </ul>
+                        <p class="menu-label">
+                            Teacher Discussion
+                        </p>
+                        <ul class="menu-list">
+                            <li><a>Fisika</a></li>
+                            <li><a>Biologi</a></li>
+                            <li><a>Kimia</a></li>
+                            <li><a>Matematika</a></li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="column is-10">
+                    <nav class="pagination" role="pagination" aria-label="pagination">
+                        <a class="pagination-previous">
+                            <span class="icon">
+                                <i class="fas fa-chevron-left"></i>
+                            </span>
+                        </a>
+                        <p class="pagination-list">Week 1</p>
+                        <a class="pagination-next">
+                            <span class="icon">
+                                <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </nav>
+                    <div class="container-fluid" id="schedule-container">
+                        <div>
+                            <table id="mytable" class="table is-bordered is-fullwidth is-small spasi dataTable">
+                                <thead>
+                                    <tr>
+                                        <th class="text-center">NO</th>
+                                        <th class="text-center">JAM</th>
+                                        <th class="text-center">MONDAY</th>
+                                        <th class="text-center">TUESDAY</th>
+                                        <th class="text-center">WEDNESDAY</th>
+                                        <th class="text-center">THURSDAY</th>
+                                        <th class="text-center">FRIDAY</th>
+                                        <th class="text-center">SATURDAY</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tbody" align="center">
+                                    <tr>
+                                        <td>1</td>
+                                        <td> 07.00-08.30 </td>
+                                        <td>
+                                            <button type="button" class="button is-success is-fullwidth is-small spasi" data-toggle="modal" data-target="#modalRencana">Matematika di Kelas I-A</button>
+                                            <button type="button" class="button is-link is-fullwidth is-small spasi" data-toggle="modal" data-target="#modalPresensi"><i class="fa fa-universal-access" aria-hidden="true"></i>&nbsp Presensi</button>
+                                            <button type="button" class="button is-link is-fullwidth is-small spasi" data-toggle="modal" data-target="#modalTugas"><i class="fa fa-tasks" aria-hidden="true"></i>&nbsp Tugas</button>
+                                        </td>
+                                        <td>
+                                        </td>
+                                        <td>
+                                            <button type="button" class="button is-info is-fullwidth is-small spasi" data-toggle="modal" data-target="#modalRencana">Matematika di Kelas I-B</button>
+                                            <button type="button" class="button is-link is-fullwidth is-small spasi" data-toggle="modal" data-target="#modalPresensi"><i class="fa fa-universal-access" aria-hidden="true"></i>&nbsp Presensi</button>
+                                            <button type="button" class="button is-link is-fullwidth is-small spasi" data-toggle="modal" data-target="#modalTugas"><i class="fa fa-tasks" aria-hidden="true"></i>&nbsp Tugas</button>
+                                        </td>
+                                        <td>
+                                        </td>
+                                        <td>
+                                            <button type="button" class="button is-warning is-fullwidth is-small spasi" data-toggle="modal" data-target="#modalRencana">Matematika di Kelas I-A</button>
+                                            <button type="button" class="button is-link is-fullwidth is-small spasi" data-toggle="modal" data-target="#modalPresensi"><i class="fa fa-universal-access" aria-hidden="true"></i>&nbsp Presensi</button>
+                                            <button type="button" class="button is-link is-fullwidth is-small spasi" data-toggle="modal" data-target="#modalTugas"><i class="fa fa-tasks" aria-hidden="true"></i>&nbsp Tugas</button>
+                                        </td>
+                                        <td>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>2</td>
+                                        <td> 08.30-10.00 </td>
+                                        <td>
+                                        </td>
+                                        <td>
+                                            <button type="button" class="button is-warning is-fullwidth is-small spasi" data-toggle="modal" data-target="#modalRencana">Bahasa Indonesia di Kelas I-B</button>
+                                            <button type="button" class="button is-link is-fullwidth is-small spasi" data-toggle="modal" data-target="#modalPresensi"><i class="fa fa-universal-access" aria-hidden="true"></i>&nbsp Presensi</button>
+                                            <button type="button" class="button is-link is-fullwidth is-small spasi" data-toggle="modal" data-target="#modalTugas"><i class="fa fa-tasks" aria-hidden="true"></i>&nbsp Tugas</button>
+                                        </td>
+                                        <td>
+                                        </td>
+                                        <td>
+                                            <button type="button" class="button is-warning is-fullwidth is-small spasi" data-toggle="modal" data-target="#modalRencana">Bahasa Indonesia di Kelas I-A</button>
+                                            <button type="button" class="button is-link is-fullwidth is-small spasi" data-toggle="modal" data-target="#modalPresensi"><i class="fa fa-universal-access" aria-hidden="true"></i>&nbsp Presensi</button>
+                                            <button type="button" class="button is-link is-fullwidth is-small spasi" data-toggle="modal" data-target="#modalTugas"><i class="fa fa-tasks" aria-hidden="true"></i>&nbsp Tugas</button>
+                                        </td>
+                                        <td>
+                                        </td>
+                                        <td>
+                                            <button type="button" class="button is-danger is-fullwidth is-small spasi" data-toggle="modal" data-target="#modalRencana">Bahasa Indonesia di Kelas I-B</button>
+                                            <button type="button" class="button is-link is-fullwidth is-small spasi" data-toggle="modal" data-target="#modalPresensi"><i class="fa fa-universal-access" aria-hidden="true"></i>&nbsp Presensi</button>
+                                            <button type="button" class="button is-link is-fullwidth is-small spasi" data-toggle="modal" data-target="#modalTugas"><i class="fa fa-tasks" aria-hidden="true"></i>&nbsp Tugas</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>2</td>
+                                        <td> 10.00-11.30 </td>
+                                        <td>
+                                            <button type="button" class="button is-success is-fullwidth is-small spasi" data-toggle="modal" data-target="#modalRencana">Bahasa Inggris di Kelas I-B</button>
+                                            <button type="button" class="button is-link is-fullwidth is-small spasi" data-toggle="modal" data-target="#modalPresensi"><i class="fa fa-universal-access" aria-hidden="true"></i>&nbsp Presensi</button>
+                                            <button type="button" class="button is-link is-fullwidth is-small spasi" data-toggle="modal" data-target="#modalTugas"><i class="fa fa-tasks" aria-hidden="true"></i>&nbsp Tugas</button>
+                                        </td>
+                                        <td>
+                                        </td>
+                                        <td>
+                                            <button type="button" class="button is-success is-fullwidth is-small spasi" data-toggle="modal" data-target="#modalRencana">Matematika di Kelas I-A</button>
+                                            <button type="button" class="button is-link is-fullwidth is-small spasi" data-toggle="modal" data-target="#modalPresensi"><i class="fa fa-universal-access" aria-hidden="true"></i>&nbsp Presensi</button>
+                                            <button type="button" class="button is-link is-fullwidth is-small spasi" data-toggle="modal" data-target="#modalTugas"><i class="fa fa-tasks" aria-hidden="true"></i>&nbsp Tugas</button>
+                                        </td>
+                                        <td>
+                                        </td>
+                                        <td>
+                                        </td>
+                                        <td>
+                                            <button type="button" class="button is-success is-fullwidth is-small spasi" data-toggle="modal" data-target="#modalRencana">Biologi di Kelas I-B</button>
+                                            <button type="button" class="button is-link is-fullwidth is-small spasi" data-toggle="modal" data-target="#modalPresensi"><i class="fa fa-universal-access" aria-hidden="true"></i>&nbsp Presensi</button>
+                                            <button type="button" class="button is-link is-fullwidth is-small spasi" data-toggle="modal" data-target="#modalTugas"><i class="fa fa-tasks" aria-hidden="true"></i>&nbsp Tugas</button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal">
+                <div class="modal-background"></div>
+                <div class="modal-card">
+                    <header class="modal-card-head">
+                        <p class="modal-class-title">Add Plan</p>
+                    </header>
+                    <section class="modal-card-body">
+                        <div class="container is-fluid">
+                            <p id="isinya"></p>
+                        </div>
+                    </section>
+                    <footer class="modal-card-foot">
+                        <button class="button" id="btnClose">Close</button>
+                        <button class="button is-primary">Save</button>
+                    </footer>
+                </div>
+                <button class="modal-close is-large" aria-label="close"></button>
+            </div>
+        </section>
+    </div>
+    <script>
+        $(function() { 
+            $('#menu-toggle').on('click', function() {
+                $(this).toggleClass('is-active')
+                $('#navMenu').slideToggle('medium', function(){
+                    $(this).toggleClass('is-active')
+                })
+            })
+            
+            $('.button').on('click', function() {
+                $('.modal').addClass('is-active')
+                
+                var id = $(this).data('id')
+                $('#isinya').text(id)
+                $('.modal-close').on('click', function() {
+                    $('.modal').removeClass('is-active')
+                })
+                $('#btnClose').on('click', function() {
+                    $('.modal').removeClass('is-active')  
+                })
+            })
+        })
+    </script>
+</body>
+</html>
