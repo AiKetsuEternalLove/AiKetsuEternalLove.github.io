@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Schedule</title>
+    
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+    <link href="../../css/bulma.css" rel="stylesheet"/>
+    <link href="../../css/bulma-badge.min.css" rel="stylesheet"/>
+    <script src="../../js/jquery.js"></script>
+    <script src="../../js/login.js"></script>
+    
+    <!-- <script src="https://db.gcs.world/src/shortcut.js"></script> -->
+    <style>
+        @media screen and (max-width: 768px) {
+            #schedule-container {
+                overflow: scroll;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar has-shadow" role="navigation" aria-label="main navigation">
+        <div class="container">
+            <div class="navbar-brand">
+                <div>
+                    <img src="http://nlsschool.com/assets/logo-withLabel.png" width="200" height="100">
+                </div>
+                
+                <a role="button" class="navbar-burger" id="menu-toggle" data-target="navMenu" aria-label="menu" aria-expanded="false">
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                </a>
+            </div>
+            
+            <div class="navbar-menu" id="navMenu">
+                <div class="navbar-end">
+                    <div class="is-hidden-desktop">
+                        <a class="navbar-item" href="administration.html">Administrasi</a>
+                        <a class="navbar-item" href="classforum.html">Class Forum</a>
+                        <a class="navbar-item" href="jadwal-sd.html">Schedule</a>
+                        <a class="navbar-item" href="">Report</a>
+                        <a class="navbar-item is-active" href="">Attendance</a>
+                    </div>
+                    
+                    <div class="navbar-item has-dropdown" id="accountMenu">
+                        <a class="navbar-link" id="name"></a>
+                        
+                        <div class="navbar-dropdown">
+                            <a class="navbar-item" onclick="logout()">Logout</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+    
+    <div class="container-fluid">
+        <section class="section">
+            <div class="columns">
+                <div class="column is-3 is-hidden-touch">
+                    <div class="menu">
+                        <p class="menu-label">General</p>
+                        <ul class="menu-list">
+                            <li><a href="classforum.html">Class Forum</a></li>
+                            <li><a href="jadwal-sd.html">Schedule</a></li>
+                            <li><a>Report</a></li>
+                            <li><a class="is-active">Attendance</a></li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="column">
+                    <div class="control">
+                        <label for="">TANGGAL</label>
+                        <input type="date" class="input" id="datepicker">
+                    </div>
+                    <br>
+                    <div class="control">
+                        <label for="">JAM MAPEL</label>
+                        <div class="select is-fullwidth">
+                            <select name="" id="pilih-jam">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                            </select>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="control">
+                        <label for="">KELAS</label>
+                        <div class="select is-fullwidth">
+                            <select name="" id="pilih-kelas">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                            </select>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="absensi-container">
+                        <form>
+                            <table class="table is-hoverable is-fullwidth">
+                                <thead>
+                                    <th>No</th>
+                                    <th>Nama</th>
+                                    <th>Hadir</th>
+                                    <th>Tidak Hadir</th>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>Alex</td>
+                                        <td>
+                                            <input type="radio" name="absensi_alex">
+                                        </td>
+                                        <td>
+                                            <input type="radio" name="absensi_alex">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>2</td>
+                                        <td>Madun</td>
+                                        <td>
+                                            <input type="radio" name="absensi_madun">
+                                        </td>
+                                        <td>
+                                            <input type="radio" name="absensi_madun">
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <input type="submit" class="button is-primary">
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <script>
+        $(function() {
+            var date = new Date()
+            var curr = date.getFullYear() + '-0' + (date.getMonth() + 1) + '-' + date.getDate()
+            
+            $('#datepicker').val(curr)
+            
+            $('#menu-toggle').click(function() {
+                $(this).toggleClass('is-active')
+                $('#navMenu').slideToggle('medium', function() {
+                    $(this).toggleClass('is-active')
+                })
+            })
+        })
+    </script>
+</body>
+</html>

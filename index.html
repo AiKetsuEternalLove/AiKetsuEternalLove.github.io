@@ -2,109 +2,184 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <title>AiKetsuEternalLove</title>
-  <link rel="shortcut icon" href="images/fav_icon.png" type="image/x-icon">
-  <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.css'>
-  <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-  <link rel="stylesheet" href="css/cards.css">
-  <script src="js/background.js"></script>
-  <link rel="stylesheet" type="text/css" href="css/background.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
-  <script src="js/bulma.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="css/fa.css" rel="stylesheet" />
+    <link href="css/bulma.css" rel="stylesheet" />
+    <link href="css/style.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+    <script src="https://db.gcs.world/src/shortcut.js"></script>
+    <script src="js/jquery.js"></script>
+    <script src="js/live.js"></script>
+    <script src="js/login.js"></script>
+    <script>
+        cekLogin()
+    </script>
+    <title>Forum National Leader School</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="css/fa.css" rel="stylesheet" />
+    <link href="css/bulma.css" rel="stylesheet" />
+    <link href="css/style.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+    <script src="https://db.gcs.world/src/shortcut.js"></script>
+    <script src="js/jquery.js"></script>
+    <script src="js/live.js"></script>
+    <script src="js/login.js"></script>
+	<script>cekLogin()</script>
+    <title>Forum National Leader School</title>
 </head>
 
-<body>
-  <div id="gradient" />
-  <!-- START NAV -->
-  <nav class="navbar">
-    <div class="container">
-      <div class="navbar-brand">
-        <a class="navbar-item" href="">
-          <img src="images/sao.png" alt="Logo">
-        </a>
-        <span class="navbar-burger burger" data-target="navbarMenu">
-        <span></span>
-        <span></span>
-        <span></span>
-        </span>
-      </div>
-      <div id="navbarMenu" class="navbar-menu">
-        <div class="navbar-end">
-          <a href="tabs.html" class="navbar-item is-active">{>.<}</a>
-          <a class="navbar-item">Examples</a>
-          <a class="navbar-item">Features</a>
-          <a class="navbar-item">Team</a>
-          <a class="navbar-item">Archives</a>
-          <a class="navbar-item">Help</a>
-          <div class="navbar-item has-dropdown is-hoverable">
-            <a class="navbar-link">Account</a>
-            <div class="navbar-dropdown">
-              <a class="navbar-item">Dashboard</a>
-              <a class="navbar-item">Profile</a>
-              <a class="navbar-item">Settings</a>
-              <hr class="navbar-divider">
-              <div class="navbar-item">Logout</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </nav>
-  <!-- END NAV -->
+<body style="overflow: hidden">
 
-  <div class="container">
-    <div id="flow">
-      <span class="flow-1"></span>
-      <span class="flow-2"></span>
-      <span class="flow-3"></span>
-    </div>
-    <div class="section">
-
-      <section class="articles">
-        <div class="column is-8 is-offset-2">
-          <!-- START ARTICLE -->
-          <div class="card article">
-            <div class="card-content">
-              <div class="media">
-                <div class="media-content has-text-centered">
-                  <a href="https://www.instagram.com/aiketsueternallove/" <p class="title article-title">AiKetsuEternalLove</p>
-                                  </a>
-                  <br>
-                  <div class="tags has-addons level-item">
-                    <a href="https://www.instagram.com/aiketsueternallove/" <span class="tag is-rounded is-info">@aiketsueternallove</span>
-                                      </a>
-                  </div>
+    <nav class="navbar has-shadow" role="navigation" aria-label="main navigation">
+        <div class="container">
+            <div class="navbar-brand">
+                <div>
+                    <img src="http://nlsschool.com/assets/logo-withLabel.png" width="100" height="100">
                 </div>
-              </div>
-              <div class="content article-body">
-                <p> </p>
-                <br><br><br><br><br><br><br><br><br><br>
-              </div>
+
+                <a role="button" class="navbar-burger" id="menu-toggle" data-target="#navMenu" aria-label="menu" aria-expanded="false">
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                </a>
             </div>
-          </div>
-          <!-- END ARTICLE -->
-      </section>
 
-      </div>
-    </div>
+            <div class="navbar-menu" id="navMenu">
+                <div class="navbar-end">
+                    <div class="navbar-item has-dropdown" id="accountMenu">
+                        <a class="navbar-link" id="name"></a>
 
-    <footer class="footer">
-      <div class="container">
-        <div class="content has-text-centered">
-          <div class="soc">
-            <a href="https://github.com/AiKetsuEternalLove"><i class="fa fa-github-alt fa-2x" aria-hidden="true"></i></a>
-            <a href="https://www.youtube.com/channel/UCfGTZwlFiven4SZZrgGBfjg?view_as=subscriber"><i class="fa fa-youtube fa-2x" aria-hidden="true"></i></a>
-            <a href="https://www.facebook.com/IKetutSidhartaYogatama"><i class="fa fa-facebook fa-2x" aria-hidden="true"></i></a>
-            <a href="#"><i class="fa fa-twitter fa-2x" aria-hidden="true"></i></a>
-          </div>
-          <p>
-            <strong>Bulma Edited</strong> by <a href="http://instagram/aiketsueternallove.com">AiKetsuEternalLove</a>. The source code is licensed <a href="http://opensource.org/licenses/mit-license.php">MIT</a>. <br>
-          </p>
+                        <div class="navbar-dropdown">
+                            <a onclick="logout()" class="navbar-item">Logout</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-    </footer>
-    <script src="js/bulma.js"></script>
+    </nav>
+
+    <center>
+        <div style="margin-top:10px" class="container">
+            <!-- HERO -->
+            <div class="block">
+
+                <!-- nav menu -->
+                <div class="columns">
+                    <div class="column is-half is-mobile">
+                        <section style="margin-bottom:10px" class="hero is-administration" >
+                            <a href="administration.html">
+                                <img id="img-center" alt="teacher" src="img/administration.png" height="100" width="100" />
+                                <h1 class="title">Adminstration</h1>
+                                <h2 class="subtitle">Reminder For Payment</h2>
+                                <div class="hero-body">
+                                    <div class="container">
+                                    </div>
+                                </div>
+                            </a>
+                        </section>
+                    </div>
+
+                    <div class="column is-half is-mobile">
+                        <section style="margin-bottom:10px" class="hero is-primary">
+                            <a href="discussion.html">
+                                <img id="img-center" alt="teacher" src="img/teacher.png" height="100" width="100" />
+                                <h1 class="title">Discussion</h1>
+                                <h2 class="subtitle">Ask Teachers</h2>
+                                <div class="hero-body">
+                                    <div class="container">
+                                    </div>
+                                </div>
+                            </a>
+                        </section>
+                    </div>
+                </div>
+
+                <div class="columns">
+                    <div class="column is-half is-mobile">
+                        <!-- nav menu -->
+                        <section style="margin-bottom:10px" class="hero is-success">
+                            <a href="detail_jadwal.html">
+                                <img id="img-center" alt="calendar" src="img/calendar.png" height="100" width="100" />
+                                <h1 class="title">Schedule</h1>
+                                <h2 class="subtitle">Lesson & Exam</h2>
+                                <div class="hero-body">
+                                    <div class="container">
+                                    </div>
+                                </div>
+                            </a>
+                        </section>
+                    </div>
+
+                    <div class="column is-half is-mobile">
+                        <section style="margin-bottom:10px" class="hero is-info">
+                            <a href="raporOnline.html">
+                                <img id="img-center" alt="report" src="img/report.png" height="100" width="100" />
+                                <h1 class="title">Report</h1>
+                                <h2 class="subtitle">Check Score</h2>
+                                <div class="hero-body">
+                                    <div class="container">
+                                        <h1 class="title">
+
+                                        </div>
+                                    </div>
+                                </a>
+                            </section>
+                        </div>
+                    </div>
+
+                    <div class="columns">
+
+                        <div class="column is-half is-mobile">
+                            <section class="hero is-attendance">
+                                <a href="absensi.html">
+                                    <img id="img-center" alt="faq" src="img/attendance.png" height="100" width="100" />
+                                    <h1 class="title">Attendance</h1>
+                                    <h2 class="subtitle">Check Presence</h2>
+                                    <div class="hero-body">
+                                        <div class="container">
+                                        </div>
+                                    </div>
+                                </a>
+                            </section>
+                        </div>
+
+                        <div class="column is-half is-mobile">
+                            <!-- nav menu -->
+                            <section class="hero is-danger">
+                                <a href="faqbaru.html">
+                                    <img id="img-center" alt="faq" src="img/faq.png" height="100" width="100" />
+                                    <h1 class="title">FAQ</h1>
+                                    <h2 class="subtitle">General Questions</h2>
+                                    <div class="hero-body">
+                                        <div class="container">
+
+                                        </div>
+                                    </div>
+                                </a>
+                            </section>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </center>
 </body>
 
 </html>
+
+<script>
+  $(function() {
+    $('#menu-toggle').click(function() {
+      $(this).toggleClass('is-active')
+      $($(this).data('target')).slideToggle(function() {
+        $(this).toggleClass('is-active')
+      })
+    })
+  })
+</script>

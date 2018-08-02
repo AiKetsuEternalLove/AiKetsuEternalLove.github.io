@@ -2,9 +2,14 @@ html,body {
   font-family: 'Open Sans', serif;
   font-size: 14px;
   font-weight: 300;
+
 }
 .hero.is-success {
-  background: #F2F6FA;
+  background: url('../img/bGround.jpg');
+  color: #fff;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 .hero .nav, .hero.is-success .nav {
   -webkit-box-shadow: none;
@@ -20,7 +25,7 @@ html,body {
 .avatar img {
   padding: 5px;
   background: #fff;
-  border-radius: 50%;
+  border-radius: 10%;
   -webkit-box-shadow: 0 2px 3px rgba(10,10,10,.1), 0 0 0 1px rgba(10,10,10,.1);
   box-shadow: 0 2px 3px rgba(10,10,10,.1), 0 0 0 1px rgba(10,10,10,.1);
 }

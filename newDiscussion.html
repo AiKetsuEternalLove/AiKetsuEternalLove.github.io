@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="css/fa.css" rel="stylesheet" />
+    <link href="css/bulma.css" rel="stylesheet" />
+    <link href="css/style.css" rel="stylesheet" />
+    <!--<script src="js/live.js"></script>-->
+    <script src="js/jquery.js"></script>
+    <script src="js/faker.id_ID.js"></script>
+    <script src="js/http-req.js"></script>
+    <script src="js/login.js"></script>
+    <!--<script src="https://db.gcs.world/src/shortcut.js"></script>-->
+    <title>Rapor bulanan</title>
+</head>
+
+    <body>
+        <nav class="navbar has-shadow" role="navigation" aria-label="main navigation">
+            <div class="container">
+                <div class="navbar-brand">
+                    <div>
+                        <!--<img src="http://nlsschool.com/assets/logo-withLabel.png" width="200" height="100">-->
+                    </div>
+
+                    <a role="button" class="navbar-burger" id="menu-toggle" data-target="#navMenu" aria-label="menu" aria-expanded="false">
+                        <span aria-hidden="true"></span>
+                        <span aria-hidden="true"></span>
+                        <span aria-hidden="true"></span>
+                    </a>
+                </div>
+                <div class="navbar-menu is-hidden-desktop" id="navMenu">
+
+                    <div class="navbar-end">
+                      <a class="navbar-item" href="administration.html">Administrasi</a>
+                      <a class="navbar-item" href="discussion.html">Discussion</a>
+                      <a class="navbar-item" href="classforum.html">Class Forum</a>
+                      <a class="navbar-item is-active" href="detail_jadwal.html">Schedule</a>
+                      <a class="navbar-item" href="raporOnline.html">Report</a>
+                      <a class="navbar-item" href="absensi.html">Attendance</a>
+                      <a class="navbar-item" href="faqbaru.html">FAQ</a>
+                    </div>
+                    
+                    <div class="navbar-item has-dropdown" id="accountMenu">
+                        <a class="navbar-link" id="name"></a>
+                        
+                        <div class="navbar-dropdown">
+                            <a class="navbar-item" onclick="logout()">Logout</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <br>
+    <div class="container">
+        <!-- FORMS -->
+        <section class="section">
+            <div class="block">
+                <form>
+                    <div class="field">
+                        <label class="label">Name</label>
+                        <p id="label-name">Name</p>
+                    </div>
+                    
+                    <div class="field">
+                        <label class="label">NIS</label>
+                        <p id="label-nis">NIS</p>
+                    </div>
+                    
+                    <div class="field">
+                        <label class="label">Subject</label>
+                        <p class="control">
+                            <span id="select-mapel" class="select">
+                                <select id="list-subject">
+                                </select>
+                            </span>
+                        </p>
+                    </div>
+                    
+                    <div class="field">
+                        <label class="label">Message</label>
+                        <p class="control">
+                            <textarea id="discussion-message" class="textarea" placeholder="Textarea"></textarea> </p>
+                        </div>
+                        
+                        <a id="submit-discussion" class="button is-primary">Submit</a>
+                        <a id="submit-batch-discussion" class="button is-primary">Submit batch (5) </a>
+                        <button id="button-delete-all" class="button is-danger">Delete all</button>
+                        
+                    </form>
+                </div>
+            </section>
+        </div>
+    </div>
+    
+    <script>
+        
+        
+        init()
+        
+        function init() {
+            readAllCookie()
+            setNameNis()
+            getAllSubject()
+            //addSubjectToDB()
+        }
+        
+        $("#submit-discussion").click(function () {
+            submitDiscussion(1)
+        })
+        
+        $("#submit-batch-discussion").click(function () {
+            submitDiscussion(5)
+        })
+        
+        $("#button-delete-all").click(function() {
+            shortcut.del({ _room: 'test', _type: 'discussion'})
+        })
+        
+        function setNameNis() {
+            $("#label-name").text(readCookie('sessionName'))
+            $("#label-nis").text(readCookie('sessionId')) 
+        }
+        
+        function submitDiscussion(total) {
+            for (var i = 0; i < total; i++) {
+                var name = readCookie('sessionName')
+                var nis = readCookie('sessionId')
+                var select = $("#select-mapel option:selected").val();
+                var discussionMessage = $("#discussion-message").val();
+                var timeCreated = (new Date()).toISOString();
+                //var timeCreated = new Date();
+                var data = { time: timeCreated, name: name, nis: nis, mapel: select, msg: discussionMessage, _room: 'room', _type: 'discussion' };
+                //shortcut.put(data).then(console.log);
+                addDiscussion(JSON.stringify(data))
+            }
+        }
+        
+        
+        function addSubjectToDB() {
+            var subject = {
+                "_room": "smp",
+                "_type": "subject",
+                "subject": "metpen"
+            }
+            addSubject(JSON.stringify(subject))
+        }
+        
+        function respGetAllSubject(response) {
+            for (var i = 0; i < response.length; i++) {
+                $("#list-subject").append("<option>"+ response[i].subject +"</option>")
+                $("#discussion-message").text(faker.lorem.paragraph)
+            }
+        }
+        
+        function respAddDiscussion() {
+            window.location.href = "discussion.html"
+        }
+        
+        function difTime(){
+            var d2 = new Date();
+            console.log(d2);
+            sleep(2000)
+            var d1 = new Date();
+            console.log(d1);
+            console.log("Diff. Seconds : "+((d2.getTime()-d1.getTime())/1000).toString());
+            //$("a#timedif").html("Diff. Seconds : "+((d2-d1)/100).toString());
+        };
+        
+        function sleep(milliseconds) {
+            var start = new Date().getTime();
+            for (var i = 0; i < 1e7; i++) {
+                if ((new Date().getTime() - start) > milliseconds) {
+                    break;
+                }
+            }
+        }
+        
+        function readAllCookie() {
+            console.log(readCookie('sessionId'))
+            console.log(readCookie('sessionName'))
+            console.log(readCookie('sessionRoom'))
+        }
+        
+        $('#menu-toggle').on('click', function() {
+            $(this).toggleClass('is-active')
+            $($(this).data('target')).slideToggle(function() {
+                $(this).toggleClass('is-active')
+            })
+        })
+    </script>
+</body>
+
+</html>
