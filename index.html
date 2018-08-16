@@ -20,6 +20,7 @@
 			background: #5850c0;
     }
     video {
+      object-fit: fill;
       background: #fff;
       background-image: url(../imgs/moon.jpg);
       background-repeat: no-repeat;
@@ -41,41 +42,52 @@
       height: 100%;
       width: 100%;
     }
-    .video-container{
-      position: absolute;
+    .video-container {
+      position: relative;
+      padding-bottom: 1000px; /*16:9*/
+      padding-top: 30px; 
+      height: 0; 
+      overflow: hidden;
+    }
+
+    .video-container iframe,
+    .video-container object,
+    .video-container embed {
+      position: fixed;
+      bottom: 0;
+      top: 0;
+      left: 0;
       width: 100%;
-      height: 90%;
+      height: 100%;
     }
     /* .copy {
-      position: fixed;
-      top: 25px;
-      left: 50%;
-      transform: translateX(-50%);
-      font-size: 18px;
-      color: white;
+position: fixed;
+top: 25px;
+left: 50%;
+transform: translateX(-50%);
+font-size: 18px;
+color: white;
     } */
   </style>
 
-  	<div class="videochat"></div>
-    <div class="video-container">
-      <video id="localVideo" autoplay muted></video>
-      <video id="remoteVideo" autoplay></video>
-    </div>
+  <div class="videochat"></div>
+  
+  </div>
 
   <script src="script.js"></script>
 
   <!-- plugin -->
   <script src="https://db.gcs.world/lib/fontawesome.js"></script>
-	<script src="https://db.gcs.world/lib/underscore.js"></script>
-	<script src="https://db.gcs.world/lib/jquery.js"></script>
-	<script src="https://db.gcs.world/lib/less.js"></script>
-	<script src="https://db.gcs.world/lib/ripple.js"></script>
-	<script src="https://db.gcs.world/src/widget.js"></script>
-<!-- script -->
-	<script src="src/videochat.js"></script>
-	<script>
-		$('<div>').appendTo('.videochat').$$('videochat');
-	</script>
+  <script src="https://db.gcs.world/lib/underscore.js"></script>
+  <script src="https://db.gcs.world/lib/jquery.js"></script>
+  <script src="https://db.gcs.world/lib/less.js"></script>
+  <script src="https://db.gcs.world/lib/ripple.js"></script>
+  <script src="https://db.gcs.world/src/widget.js"></script>
+  <!-- script -->
+  <script src="src/videochat.js"></script>
+  <script>
+    $('<div>').appendTo('.videochat').$$('videochat');
+  </script>
 
 </body>
 

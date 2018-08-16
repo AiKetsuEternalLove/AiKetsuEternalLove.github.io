@@ -17,6 +17,9 @@ $$.widget({
         </div>
 
         <div class="body">
+<div class="video-container">
+    <video id="localVideo" autoplay muted></video>
+    <video id="remoteVideo" autoplay></video>
 
         <div class="footer">
           <ul>
@@ -136,7 +139,7 @@ $$.widget({
   	}
 
   	div.footer {
-  		position: absolute;
+  		position: fixed;
   		width: 100%;
   		bottom: 0;
   		z-index: 10;
